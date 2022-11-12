@@ -1,6 +1,5 @@
 import csv
 import json
-from csv import DictReader
 
 from files import JSON_FILE_PATH
 from files import JSON_FILE_RESULT
@@ -21,10 +20,18 @@ out_users_data = []
 for user in users:
     user_books = []
     for i in range(books_per_users):
-        user_books.append(books.pop(0))
+        book = books.pop(0)
+        user_books.append({"title": book["Title"],
+                           "author": book["Author"],
+                           "pages": book["Pages"],
+                           "genre": book["Genre"]})
 
     if books_remain > 0:
-        user_books.append(books.pop(0))
+        book = books.pop(0)
+        user_books.append({"title": book["Title"],
+                           "author": book["Author"],
+                           "pages": book["Pages"],
+                           "genre": book["Genre"]})
         books_remain -= 1
 
     out_users_data.append({"name": user["name"],
